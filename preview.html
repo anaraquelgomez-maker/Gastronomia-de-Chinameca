@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sabores de Chinameca — Gastronomía Oriental</title>
+  <style>
+/* ═══════════════════════════════════════
+   SABORES DE CHINAMECA — styles.css
+   Gastronomía Oriental Salvadoreña
+═══════════════════════════════════════ */
+
+/* ── Variables ── */
+:root {
+  --cafe:       #2C1A0E;
+  --cafe-mid:   #4A2C14;
+  --terracota:  #C0522A;
+  --dorado:     #D4952A;
+  --crema:      #FBF6EE;
+  --crema-dark: #F0E8D8;
+  --texto:      #1C1008;
+  --gris:       #6B5E52;
+  --blanco:     #FFFFFF;
+  --sombra:     0 8px 40px rgba(44,26,14,.15);
+  --sombra-lg:  0 20px 60px rgba(44,26,14,.2);
+  --radius:     10px;
+  --transition: .3s cubic-bezier(.25,.8,.25,1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--crema);
+  color: var(--texto);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { display: block; width: 100%; object-fit: cover; }
+a  { text-decoration: none; color: inherit; }
+
+/* ── Helpers ── */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
+.label {
+  display: inline-block;
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--terracota); margin-bottom: .5rem;
+}
+.label-light { color: var(--dorado); }
+.section-head { text-align: center; margin-bottom: 3rem; }
+.section-lead { color: var(--gris); max-width: 560px; margin: .75rem auto 0; font-size: .95rem; }
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--cafe);
+  line-height: 1.15;
+}
+h2 em { font-style: italic; color: var(--terracota); }
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: transparent;
+  transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+  padding: 0;
+}
+#navbar.scrolled {
+  background: var(--cafe);
+  box-shadow: 0 2px 20px rgba(0,0,0,.3);
+}
+.nav-inner {
+  max-width: 1160px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 1.5rem;
+  transition: padding var(--transition);
+}
+#navbar.scrolled .nav-inner { padding: .8rem 1.5rem; }
+
+.nav-logo {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; font-weight: 500;
+  color: var(--blanco);
+}
+.nav-logo strong { font-weight: 700; }
+.logo-icon { font-size: 1.4rem; }
+
+.nav-links {
+  display: flex; gap: 2rem; list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,.85);
+  font-size: .9rem; font-weight: 500;
+  letter-spacing: .04em;
+  position: relative;
+  transition: color .2s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 2px; background: var(--dorado);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .25s;
+}
+.nav-links a:hover { color: var(--dorado); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* Hamburger */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--blanco);
+  transition: transform .3s, opacity .3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ══════════════════════════════════
+   HERO
+══════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(170deg, rgba(44,26,14,.78) 0%, rgba(44,26,14,.45) 100%),
+    url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80') center/cover no-repeat;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 4rem;
+  position: relative;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 80%, rgba(192,82,42,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content { position: relative; max-width: 720px; }
+.hero-tag {
+  display: inline-block;
+  background: rgba(212,149,42,.2);
+  border: 1px solid rgba(212,149,42,.5);
+  color: var(--dorado);
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: .35rem 1.1rem; border-radius: 999px;
+  margin-bottom: 1.5rem;
+  animation: fadeUp .9s ease both;
+}
+.hero-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  color: var(--blanco);
+  line-height: 1.08;
+  animation: fadeUp .9s .15s ease both;
+}
+.hero-content h1 em { font-style: italic; color: var(--dorado); }
+.hero-content p {
+  color: rgba(255,255,255,.82);
+  font-size: 1.1rem; font-weight: 300;
+  margin: 1.25rem 0 2.5rem;
+  animation: fadeUp .9s .3s ease both;
+}
+.btn-cta {
+  display: inline-block;
+  background: var(--terracota);
+  color: var(--blanco);
+  font-weight: 600; font-size: .95rem;
+  padding: .9rem 2.4rem; border-radius: 4px;
+  letter-spacing: .04em;
+  border: 2px solid var(--terracota);
+  transition: background .25s, transform .2s, box-shadow .25s;
+  animation: fadeUp .9s .45s ease both;
+}
+.btn-cta:hover {
+  background: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(192,82,42,.4);
+}
+.hero-scroll {
+  position: absolute; bottom: 2rem;
+  color: rgba(255,255,255,.5);
+  font-size: 1.4rem;
+  animation: bounce 2s infinite;
+}
+
+/* ══════════════════════════════════
+   NOSOTROS
+══════════════════════════════════ */
+.nosotros { padding: 6rem 0; background: var(--blanco); }
+.nosotros-grid {
+  display: flex; gap: 4rem; align-items: center; flex-wrap: wrap;
+}
+.nosotros-img-wrap {
+  flex: 1 1 340px;
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--sombra-lg);
+}
+.nosotros-img-wrap img { height: 480px; }
+.nosotros-badge {
+  position: absolute; bottom: 1.5rem; right: -1.5rem;
+  background: var(--terracota);
+  color: var(--blanco);
+  border-radius: var(--radius);
+  padding: 1rem 1.4rem;
+  text-align: center;
+  box-shadow: var(--sombra);
+}
+.badge-num { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; line-height: 1; }
+.badge-txt { font-size: .78rem; opacity: .85; }
+
+.nosotros-text { flex: 1 1 340px; }
+.nosotros-text h2 { margin-bottom: 1.25rem; }
+.nosotros-text p { color: var(--gris); margin-bottom: 1rem; font-size: .95rem; }
+.nosotros-stats {
+  display: flex; gap: 2rem; margin-top: 2rem;
+  padding-top: 2rem; border-top: 1px solid var(--crema-dark);
+}
+.stat { text-align: center; }
+.stat-n {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700; color: var(--terracota);
+}
+.stat-l { font-size: .8rem; color: var(--gris); }
+
+/* ══════════════════════════════════
+   SERVICIOS / PLATOS
+══════════════════════════════════ */
+.servicios { padding: 6rem 0; background: var(--crema); }
+.platos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.75rem;
+}
+.plato-card {
+  background: var(--blanco);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.plato-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sombra-lg);
+}
+.plato-img { position: relative; height: 210px; overflow: hidden; }
+.plato-img img { height: 100%; transition: transform .5s ease; }
+.plato-card:hover .plato-img img { transform: scale(1.08); }
+.plato-tag {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--terracota); color: var(--blanco);
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: .25rem .75rem; border-radius: 999px;
+}
+.plato-body { padding: 1.3rem 1.4rem 1rem; }
+.plato-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--cafe); margin-bottom: .5rem;
+}
+.plato-body p { font-size: .87rem; color: var(--gris); }
+.plato-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .8rem 1.4rem;
+  border-top: 1px solid var(--crema-dark);
+  font-size: .82rem;
+}
+.precio { font-weight: 700; color: var(--terracota); font-size: .95rem; }
+.origen { color: var(--gris); }
+
+/* ══════════════════════════════════
+   FORMULARIO / CONTACTO
+══════════════════════════════════ */
+.contacto {
+  padding: 6rem 0;
+  background: var(--cafe);
+  position: relative;
+}
+.contacto::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--terracota), var(--dorado), var(--terracota));
+}
+.contacto-wrap {
+  display: flex; gap: 4rem; align-items: flex-start; flex-wrap: wrap;
+}
+.contacto-info { flex: 1 1 280px; }
+.contacto-info h2 { color: var(--blanco); margin-bottom: 1rem; }
+.contacto-info p { color: rgba(255,255,255,.7); font-size: .95rem; margin-bottom: 2rem; }
+.contacto-datos { display: flex; flex-direction: column; gap: .75rem; }
+.dato { color: rgba(255,255,255,.65); font-size: .88rem; }
+
+.form-wrap {
+  flex: 1 1 360px;
+  background: var(--blanco);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: var(--sombra-lg);
+}
+.form-group { margin-bottom: 1.25rem; }
+.form-group label {
+  display: block;
+  font-size: .82rem; font-weight: 600;
+  color: var(--cafe); margin-bottom: .4rem;
+  letter-spacing: .03em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  border: 1.5px solid #E0D5C8;
+  border-radius: 6px;
+  padding: .7rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .92rem;
+  color: var(--texto);
+  background: var(--crema);
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--terracota);
+  box-shadow: 0 0 0 3px rgba(192,82,42,.12);
+  background: var(--blanco);
+}
+.form-group input.invalid,
+.form-group select.invalid,
+.form-group textarea.invalid {
+  border-color: #E53E3E;
+  box-shadow: 0 0 0 3px rgba(229,62,62,.1);
+}
+.form-group input.valid,
+.form-group select.valid,
+.form-group textarea.valid {
+  border-color: #38A169;
+}
+.error-msg {
+  display: block;
+  font-size: .78rem; color: #E53E3E;
+  margin-top: .3rem; min-height: 1.1rem;
+}
+.btn-submit {
+  width: 100%;
+  background: var(--terracota);
+  color: var(--blanco);
+  border: none; cursor: pointer;
+  padding: .95rem;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .95rem; font-weight: 600;
+  letter-spacing: .04em;
+  transition: background .25s, transform .2s;
+  margin-top: .5rem;
+}
+.btn-submit:hover {
+  background: var(--cafe-mid);
+  transform: translateY(-2px);
+}
+.form-success {
+  display: none;
+  margin-top: 1.25rem;
+  background: #F0FFF4;
+  border: 1.5px solid #68D391;
+  color: #276749;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  font-size: .9rem; font-weight: 500;
+  text-align: center;
+}
+.form-success.visible { display: block; animation: fadeUp .4s ease; }
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  background: #160C04;
+  padding: 4rem 0 1.5rem;
+  color: rgba(255,255,255,.7);
+}
+.footer-inner {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 1.5rem;
+}
+.footer-brand { flex: 1 1 240px; }
+.footer-brand .logo-icon { font-size: 1.6rem; margin-bottom: .3rem; }
+.footer-brand span {
+  display: block; font-size: 1rem; color: var(--blanco); margin-bottom: .5rem;
+}
+.footer-brand p { font-size: .85rem; color: rgba(255,255,255,.45); }
+.footer-links, .footer-redes { flex: 1 1 160px; }
+.footer-links h4, .footer-redes h4 {
+  color: var(--dorado);
+  font-size: .78rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.footer-links { display: flex; flex-direction: column; gap: .6rem; }
+.footer-links a { font-size: .87rem; transition: color .2s; }
+.footer-links a:hover { color: var(--dorado); }
+.redes-icons { display: flex; flex-direction: column; gap: .6rem; }
+.redes-icons a { font-size: .87rem; transition: color .2s; }
+.redes-icons a:hover { color: var(--dorado); }
+.footer-bottom { text-align: center; font-size: .78rem; }
+.footer-bottom p { margin-bottom: .25rem; }
+.creditos { color: rgba(255,255,255,.25); }
+
+/* ══════════════════════════════════
+   KEYFRAMES
+══════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ══════════════════════════════════
+   RESPONSIVIDAD
+══════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .platos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nosotros-grid { gap: 2.5rem; }
+  .nosotros-badge { right: 0; }
+}
+
+/* Móvil */
+@media (max-width: 600px) {
+  /* Navbar */
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--cafe);
+    padding: 1rem 1.5rem 1.5rem;
+    gap: 0;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li a {
+    display: block; padding: .7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    font-size: 1rem;
+  }
+
+  /* Grid → 1 columna */
+  .platos-grid { grid-template-columns: 1fr; }
+
+  /* Nosotros */
+  .nosotros-img-wrap img { height: 300px; }
+  .nosotros-badge { right: 0; bottom: 1rem; }
+  .nosotros-stats { gap: 1rem; }
+
+  /* Contacto */
+  .contacto-wrap { gap: 2rem; }
+  .form-wrap { padding: 1.5rem; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; gap: 2rem; }
+}
+
+</style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <header id="navbar">
+    <nav class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <span class="logo-icon">🌶</span>
+        <span>Sabores de <strong>Chinameca</strong></span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Platos</a></li>
+        <li><a href="#contacto">Reservar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section id="inicio" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-tag">📍 Chinameca, San Miguel, El Salvador</span>
+      <h1>Donde el <em>Sabor</em><br>Cuenta la Historia</h1>
+      <p>Gastronomía auténtica del oriente salvadoreño. Tradición, fuego y sazón en cada bocado desde el corazón de Chinameca.</p>
+      <a href="#servicios" class="btn-cta">Ver Nuestros Platos</a>
+    </div>
+    <div class="hero-scroll">↓</div>
+  </section>
+
+  <!-- ══ NOSOTROS ══ -->
+  <section id="nosotros" class="nosotros">
+    <div class="container">
+      <div class="nosotros-grid">
+        <div class="nosotros-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&q=80"
+            alt="Cocina tradicional salvadoreña"
+            loading="lazy"
+          />
+          <div class="nosotros-badge">
+            <span class="badge-num">+20</span>
+            <span class="badge-txt">años de tradición</span>
+          </div>
+        </div>
+        <div class="nosotros-text">
+          <span class="label">✦ Quiénes Somos</span>
+          <h2>Raíces Chinamecanas<br><em>en cada receta</em></h2>
+          <p>Somos un proyecto gastronómico nacido en Chinameca, municipio del departamento de San Miguel, en el oriente de El Salvador. Nuestro propósito es preservar y difundir los sabores auténticos de esta tierra volcánica y generosa.</p>
+          <p>Cada plato que preparamos lleva ingredientes locales: tomates de patio, chiles cobaneros, yuca de la zona y masa nixtamalizada molida en piedra. Cocinamos con leña y con memoria, honrando las recetas que nuestras abuelas guardaron por décadas.</p>
+          <div class="nosotros-stats">
+            <div class="stat">
+              <span class="stat-n">15+</span>
+              <span class="stat-l">Platos típicos</span>
+            </div>
+            <div class="stat">
+              <span class="stat-n">100%</span>
+              <span class="stat-l">Ingredientes locales</span>
+            </div>
+            <div class="stat">
+              <span class="stat-n">∞</span>
+              <span class="stat-l">Sabor auténtico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SERVICIOS / PLATOS ══ -->
+  <section id="servicios" class="servicios">
+    <div class="container">
+      <div class="section-head">
+        <span class="label">✦ Nuestra Carta</span>
+        <h2>Platos que <em>Enamoran</em></h2>
+        <p class="section-lead">Selección de sabores tradicionales de Chinameca y el oriente salvadoreño, preparados con técnicas ancestrales.</p>
+      </div>
+      <div class="platos-grid">
+
+        <div class="plato-card">
+          <div class="plato-img">
+            <img src="https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=600&q=80" alt="Pupusas chinamecanas" loading="lazy"/>
+            <span class="plato-tag">Estrella</span>
+          </div>
+          <div class="plato-body">
+            <h3>Pupusas Chinamecanas</h3>
+            <p>Masa gruesa molida en piedra, rellenas de chicharrón con tomate, loroco y queso artesanal. Servidas con curtido y salsa de tomate casera.</p>
+            <div class="plato-footer">
+              <span class="precio">$1.50 c/u</span>
+              <span class="origen">🌽 Maíz local</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plato-card">
+          <div class="plato-img">
+            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Sopa de pata" loading="lazy"/>
+            <span class="plato-tag">Tradicional</span>
+          </div>
+          <div class="plato-body">
+            <h3>Sopa de Pata</h3>
+            <p>Caldo denso de pata de res con verduras de temporada, chiles y especias orientales. Receta transmitida de generación en generación en Chinameca.</p>
+            <div class="plato-footer">
+              <span class="precio">$4.00</span>
+              <span class="origen">🐄 Res local</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plato-card">
+          <div class="plato-img">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Yuca frita con chicharrón" loading="lazy"/>
+            <span class="plato-tag">Popular</span>
+          </div>
+          <div class="plato-body">
+            <h3>Yuca con Chicharrón</h3>
+            <p>Yuca de siembra propia, cocida y frita hasta dorar. Acompañada de chicharrón crujiente, encurtido de cebolla y salsa chimol de la casa.</p>
+            <div class="plato-footer">
+              <span class="precio">$3.50</span>
+              <span class="origen">🌿 Yuca de patio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plato-card">
+          <div class="plato-img">
+            <img src="https://images.unsplash.com/photo-1551326844-4df70f78d0e9?w=600&q=80" alt="Tamales de elote" loading="lazy"/>
+            <span class="plato-tag">Festivo</span>
+          </div>
+          <div class="plato-body">
+            <h3>Tamales de Elote</h3>
+            <p>Elote tierno molido con azúcar y mantequilla, envuelto en tuza y cocido al vapor. Dulces y esponjosos, típicos de las fiestas patronales de Chinameca.</p>
+            <div class="plato-footer">
+              <span class="precio">$0.75 c/u</span>
+              <span class="origen">🌽 Cosecha local</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plato-card">
+          <div class="plato-img">
+            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Enchiladas salvadoreñas" loading="lazy"/>
+            <span class="plato-tag">Clásico</span>
+          </div>
+          <div class="plato-body">
+            <h3>Enchiladas Salvadoreñas</h3>
+            <p>Tortilla frita con carne molida sazonada, cubierta de ensalada fresca, remolacha, queso duro rallado y salsa de tomate con jalapeño.</p>
+            <div class="plato-footer">
+              <span class="precio">$2.00</span>
+              <span class="origen">🍅 Tomate de patio</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plato-card">
+          <div class="plato-img">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Atol shuco" loading="lazy"/>
+            <span class="plato-tag">Bebida</span>
+          </div>
+          <div class="plato-body">
+            <h3>Atol Shuco con Elote</h3>
+            <p>Bebida ancestral de masa de maíz negro fermentado, servida caliente con frijoles molidos y chile. Energizante y emblema del desayuno oriental.</p>
+            <div class="plato-footer">
+              <span class="precio">$1.00</span>
+              <span class="origen">🌽 Maíz negro</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FORMULARIO ══ -->
+  <section id="contacto" class="contacto">
+    <div class="container">
+      <div class="contacto-wrap">
+        <div class="contacto-info">
+          <span class="label label-light">✦ Reservaciones</span>
+          <h2>¿Listo para<br><em>Visitarnos?</em></h2>
+          <p>Reserva tu mesa o solicita servicio de catering para eventos especiales. Respondemos en menos de 24 horas.</p>
+          <div class="contacto-datos">
+            <div class="dato">📍 Chinameca, San Miguel, El Salvador</div>
+            <div class="dato">📞 +503 7700-0000</div>
+            <div class="dato">🕐 Lun–Dom: 7:00 AM – 8:00 PM</div>
+          </div>
+        </div>
+        <div class="form-wrap">
+          <form id="reservaForm" novalidate>
+            <div class="form-group">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="name" />
+              <span class="error-msg" id="error-nombre"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" placeholder="correo@ejemplo.com" autocomplete="email" />
+              <span class="error-msg" id="error-email"></span>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" placeholder="7000-0000" autocomplete="tel" />
+              <span class="error-msg" id="error-telefono"></span>
+            </div>
+            <div class="form-group">
+              <label for="personas">Número de personas</label>
+              <select id="personas">
+                <option value="">Selecciona</option>
+                <option value="1-2">1 – 2 personas</option>
+                <option value="3-5">3 – 5 personas</option>
+                <option value="6-10">6 – 10 personas</option>
+                <option value="11+">Más de 10 (evento)</option>
+              </select>
+              <span class="error-msg" id="error-personas"></span>
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Mensaje o petición especial</label>
+              <textarea id="mensaje" rows="3" placeholder="Cuéntanos qué necesitas..."></textarea>
+              <span class="error-msg" id="error-mensaje"></span>
+            </div>
+            <button type="submit" class="btn-submit">Enviar Reservación →</button>
+            <div class="form-success" id="formSuccess">
+              ¡Gracias! Tu reservación fue recibida. Te contactamos pronto. 🌶️
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-icon">🌶</span>
+          <span>Sabores de <strong>Chinameca</strong></span>
+          <p>Gastronomía auténtica del oriente salvadoreño.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegación</h4>
+          <a href="#inicio">Inicio</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#servicios">Platos</a>
+          <a href="#contacto">Reservar</a>
+        </div>
+        <div class="footer-redes">
+          <h4>Síguenos</h4>
+          <div class="redes-icons">
+            <a href="#" aria-label="Facebook">📘 Facebook</a>
+            <a href="#" aria-label="Instagram">📸 Instagram</a>
+            <a href="#" aria-label="WhatsApp">💬 WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Sabores de Chinameca — Chinameca, San Miguel, El Salvador</p>
+        <p class="creditos">Desarrollado con ❤️ — Proyecto académico Frontend</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+/* ═══════════════════════════════════════
+   SABORES DE CHINAMECA — script.js
+   Manipulación del DOM y validación de formularios
+═══════════════════════════════════════ */
+
+/* ── 1. AÑO DINÁMICO EN FOOTER ── */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ══════════════════════════════════
+   2. NAVBAR: efecto scroll + hamburguesa
+══════════════════════════════════ */
+const navbar    = document.getElementById('navbar');
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+
+// Efecto de scroll — cambia fondo del navbar al bajar
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Menú hamburguesa — abre/cierra con classList
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+
+// Cerrar menú al hacer clic en un enlace
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+/* ══════════════════════════════════
+   3. VALIDACIÓN DE FORMULARIO
+══════════════════════════════════ */
+const form       = document.getElementById('reservaForm');
+const successMsg = document.getElementById('formSuccess');
+
+// Regex
+const REGEX_EMAIL = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+const REGEX_TEL   = /^[267]\d{3}[-\s]?\d{4}$/; // formato SV: 7000-0000
+
+// Mostrar error en un campo
+function showError(fieldId, msg) {
+  const field = document.getElementById(fieldId);
+  const error = document.getElementById('error-' + fieldId);
+  field.classList.add('invalid');
+  field.classList.remove('valid');
+  if (error) error.textContent = msg;
+}
+
+// Limpiar error de un campo
+function clearError(fieldId) {
+  const field = document.getElementById(fieldId);
+  const error = document.getElementById('error-' + fieldId);
+  field.classList.remove('invalid');
+  field.classList.add('valid');
+  if (error) error.textContent = '';
+}
+
+// Limpiar al corregir (input event)
+['nombre', 'email', 'telefono', 'personas', 'mensaje'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => {
+    if (el.value.trim() !== '') {
+      el.classList.remove('invalid');
+      const err = document.getElementById('error-' + id);
+      if (err) err.textContent = '';
+    }
+  });
+});
+
+// Validar todos los campos y devolver true si son válidos
+function validarFormulario() {
+  let valido = true;
+
+  // Nombre
+  const nombre = document.getElementById('nombre').value.trim();
+  if (nombre.length < 3) {
+    showError('nombre', 'Ingresa tu nombre completo (mínimo 3 caracteres).');
+    valido = false;
+  } else {
+    clearError('nombre');
+  }
+
+  // Email
+  const email = document.getElementById('email').value.trim();
+  if (!REGEX_EMAIL.test(email)) {
+    showError('email', 'Ingresa un correo electrónico válido (ej: nombre@gmail.com).');
+    valido = false;
+  } else {
+    clearError('email');
+  }
+
+  // Teléfono
+  const telefono = document.getElementById('telefono').value.trim();
+  if (!REGEX_TEL.test(telefono)) {
+    showError('telefono', 'Ingresa un número válido de El Salvador (ej: 7000-0000).');
+    valido = false;
+  } else {
+    clearError('telefono');
+  }
+
+  // Personas (select)
+  const personas = document.getElementById('personas').value;
+  if (!personas) {
+    showError('personas', 'Selecciona el número de personas.');
+    valido = false;
+  } else {
+    clearError('personas');
+  }
+
+  // Mensaje
+  const mensaje = document.getElementById('mensaje').value.trim();
+  if (mensaje.length < 10) {
+    showError('mensaje', 'Escribe al menos 10 caracteres en tu mensaje.');
+    valido = false;
+  } else {
+    clearError('mensaje');
+  }
+
+  return valido;
+}
+
+// Submit del formulario
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  successMsg.classList.remove('visible');
+
+  if (validarFormulario()) {
+    // Éxito: mostrar mensaje y limpiar form
+    successMsg.classList.add('visible');
+    form.reset();
+
+    // Quitar clases "valid" de todos los campos
+    ['nombre', 'email', 'telefono', 'personas', 'mensaje'].forEach(id => {
+      document.getElementById(id).classList.remove('valid', 'invalid');
+    });
+
+    // Scroll al mensaje de éxito
+    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Ocultar después de 6 segundos
+    setTimeout(() => successMsg.classList.remove('visible'), 6000);
+  }
+});
+
+/* ══════════════════════════════════
+   4. ANIMACIÓN DE ENTRADA — Intersection Observer
+   (Tarjetas aparecen al hacer scroll)
+══════════════════════════════════ */
+const animElements = document.querySelectorAll('.plato-card, .info-card, .nosotros-grid, .contacto-wrap');
+
+// Estilos iniciales (invisible)
+animElements.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity .6s ease, transform .6s ease';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Stagger: pequeño delay por índice
+      const delay = Array.from(animElements).indexOf(entry.target) % 3 * 100;
+      setTimeout(() => {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }, delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+animElements.forEach(el => observer.observe(el));
+
+</script>
+</body>
+</html>
