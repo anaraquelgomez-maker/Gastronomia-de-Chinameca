@@ -83,6 +83,6 @@ Publicado en **GitHub Pages**:
 
 ## 👩‍💻 Créditos
 
-Proyecto académico — Desarrollo Frontend  
+Proyecto académico — Grupo #2  
 Actividad evaluada — Implementación de interactividad avanzada  
 © 2026 Sabores de Chinameca, San Miguel, El Salvador
